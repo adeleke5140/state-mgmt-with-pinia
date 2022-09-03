@@ -22,6 +22,10 @@ const CreateUser = () => {
     email: ""
   }
 }
+
+const DeleteUser = (id) => {
+  user_store.delete(id)
+}
 </script>
 
 <template>
@@ -58,13 +62,19 @@ const CreateUser = () => {
 
       <div class="users" v-if="!sort">
         <div class="user" v-for="user in user_store.users">
-          {{ user.name }}
+          <span>ID: {{ user.id }}</span>
+          <h3>{{ user.name }}</h3>
+          <p>{{ user.email }}</p>
+          <button @click="DeleteUser(user.id)" class="delete">Delete</button>
         </div>
       </div>
 
       <div class="users" v-else>
         <div class="user" v-for="user in user_store.usersByName">
-          {{ user.name }}
+          <span>ID: {{ user.id }}</span>
+          <h3>{{ user.name }}</h3>
+          <p>{{ user.email }}</p>
+          <button @click="DeleteUser(user.id)" class="delete">Delete</button>
         </div>
       </div>
     </main>
@@ -78,5 +88,16 @@ ul {
 
 table {
   margin-top: 40px;
+}
+
+.user {
+  border: 1px solid hotpink;
+  padding: 10px;
+  margin-bottom: 40px;
+}
+.delete {
+  background: red;
+  border: none;
+  border-radius: 10px;
 }
 </style>
